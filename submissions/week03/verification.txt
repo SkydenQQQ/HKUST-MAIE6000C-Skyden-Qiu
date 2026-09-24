@@ -1,0 +1,217 @@
+W03 verification evidence - executed by OpenAI Codex, 2026-09-22
+Windows / Python 3.11.16 / native SQLite; Docker and PostgreSQL NOT tested.
+Local absolute workspace paths in captured output are normalized to <workspace>.
+
+
+=== BASELINE COLLECTION: python -m pytest --collect-only -q tests/unit tests/integration ===
+tests/unit/test_ai_service.py::test_triage_access_case
+tests/unit/test_ai_service.py::test_triage_general_case
+tests/integration/test_api_case_flow.py::test_health_endpoints
+tests/integration/test_api_case_flow.py::test_create_and_read_case_and_job
+
+============================== warnings summary ===============================
+..\venv\Lib\site-packages\starlette\testclient.py:51
+  <workspace>\work\venv\Lib\site-packages\starlette\testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+..\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11
+  <workspace>\work\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+4 tests collected in 0.17s
+
+
+=== BASELINE TESTS: python -m pytest -q tests/unit tests/integration ===
+....                                                                     [100%]
+============================== warnings summary ===============================
+..\venv\Lib\site-packages\starlette\testclient.py:51
+  <workspace>\work\venv\Lib\site-packages\starlette\testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+..\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11
+  <workspace>\work\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+4 passed, 2 warnings in 0.25s
+
+
+=== AFTER COLLECTION: python -m pytest --collect-only -q tests/unit tests/integration ===
+tests/unit/test_ai_service.py::test_triage_access_case
+tests/unit/test_ai_service.py::test_triage_general_case
+tests/integration/test_api_case_flow.py::test_health_endpoints
+tests/integration/test_api_case_flow.py::test_create_and_read_case_and_job
+tests/integration/test_api_integration.py::test_create_case_enqueues_job
+tests/integration/test_api_integration.py::test_health_ready
+
+============================== warnings summary ===============================
+..\venv\Lib\site-packages\starlette\testclient.py:51
+  <workspace>\work\venv\Lib\site-packages\starlette\testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+..\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11
+  <workspace>\work\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 tests collected in 0.03s
+
+
+=== AFTER TESTS: python -m pytest -q tests/unit tests/integration ===
+......                                                                   [100%]
+============================== warnings summary ===============================
+..\venv\Lib\site-packages\starlette\testclient.py:51
+  <workspace>\work\venv\Lib\site-packages\starlette\testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+..\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11
+  <workspace>\work\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 2 warnings in 0.29s
+
+
+=== RUFF: python -m ruff check . ===
+All checks passed!
+
+
+=== FRESH SQLITE MIGRATION: python -m alembic upgrade head ===
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Context impl SQLiteImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade  -> 20260713_0001, create initial tables
+INFO  [alembic.runtime.migration] Running upgrade  -> 20260713_0001, create initial tables
+
+
+=== FULL SUITE WITH LIVE API/AI/WORKER: python -m pytest -q ===
+.......                                                                  [100%]
+============================== warnings summary ===============================
+..\venv\Lib\site-packages\starlette\testclient.py:51
+  <workspace>\work\venv\Lib\site-packages\starlette\testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+..\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11
+  <workspace>\work\venv\Lib\site-packages\pythonjsonlogger\jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+7 passed, 2 warnings in 1.48s
+
+
+=== HTTP AND DATABASE OBSERVATIONS ===
+{
+  "database": "SQLite (native local verification; not Docker/PostgreSQL)",
+  "python": "3.11.16 (main, Sep  1 2026, 14:15:24) [MSC v.1944 64 bit (AMD64)]",
+  "api_port": 27317,
+  "ai_port": 27318,
+  "health": {
+    "/": {
+      "status": 200,
+      "body": {
+        "service": "api",
+        "status": "ok"
+      }
+    },
+    "/health/live": {
+      "status": 200,
+      "body": {
+        "service": "api",
+        "status": "ok"
+      }
+    },
+    "/health/ready": {
+      "status": 200,
+      "body": {
+        "service": "api",
+        "status": "ok"
+      }
+    },
+    "/metrics": {
+      "status": 200,
+      "body": {
+        "api_http_requests_total_present": true
+      }
+    }
+  },
+  "created": {
+    "case": {
+      "id": "0cc9a4c8-1fcf-4329-b0f6-040d2f2320b8",
+      "title": "Cannot login to portal",
+      "description": "Password reset did not restore access to the dashboard.",
+      "status": "queued",
+      "ai_label": null,
+      "ai_summary": null,
+      "ai_confidence": null,
+      "created_at": "2026-09-22T03:54:12.902716",
+      "updated_at": "2026-09-22T03:54:12.902716"
+    },
+    "job": {
+      "id": 2,
+      "case_id": "0cc9a4c8-1fcf-4329-b0f6-040d2f2320b8",
+      "job_type": "triage_case",
+      "status": "pending",
+      "attempts": 0,
+      "error": null,
+      "created_at": "2026-09-22T03:54:12.911075",
+      "claimed_at": null,
+      "completed_at": null
+    }
+  },
+  "final_case": {
+    "id": "0cc9a4c8-1fcf-4329-b0f6-040d2f2320b8",
+    "title": "Cannot login to portal",
+    "description": "Password reset did not restore access to the dashboard.",
+    "status": "triaged",
+    "ai_label": "access",
+    "ai_summary": "Cannot login to portal: Password reset did not restore access to the dashboard.",
+    "ai_confidence": 0.79,
+    "created_at": "2026-09-22T03:54:12.902716",
+    "updated_at": "2026-09-22T03:54:13.087645"
+  },
+  "final_job": {
+    "id": 2,
+    "case_id": "0cc9a4c8-1fcf-4329-b0f6-040d2f2320b8",
+    "job_type": "triage_case",
+    "status": "completed",
+    "attempts": 1,
+    "error": null,
+    "created_at": "2026-09-22T03:54:12.911075",
+    "claimed_at": "2026-09-22T03:54:13.006573",
+    "completed_at": "2026-09-22T03:54:13.087645"
+  },
+  "persisted_case": [
+    "0cc9a4c8-1fcf-4329-b0f6-040d2f2320b8",
+    "triaged",
+    "access"
+  ],
+  "persisted_job": [
+    2,
+    "completed",
+    1
+  ],
+  "result": "passed"
+}
+
+=== WORKER LOG ===
+{"asctime": "2026-09-22 11:54:09,664", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "worker_started", "poll_seconds": 0.2, "ai_service_url": "http://127.0.0.1:27318"}
+{"asctime": "2026-09-22 11:54:11,498", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_claimed", "job_id": 1, "case_id": "c4d1a24b-83b8-4b6e-b4ad-7aea40e3dd02"}
+{"asctime": "2026-09-22 11:54:11,572", "levelname": "INFO", "service": null, "name": "httpx", "message": "HTTP Request: POST http://127.0.0.1:27318/triage \"HTTP/1.1 200 OK\""}
+{"asctime": "2026-09-22 11:54:11,589", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_completed", "job_id": 1, "label": "incident"}
+{"asctime": "2026-09-22 11:54:13,021", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_claimed", "job_id": 2, "case_id": "0cc9a4c8-1fcf-4329-b0f6-040d2f2320b8"}
+{"asctime": "2026-09-22 11:54:13,079", "levelname": "INFO", "service": null, "name": "httpx", "message": "HTTP Request: POST http://127.0.0.1:27318/triage \"HTTP/1.1 200 OK\""}
+{"asctime": "2026-09-22 11:54:13,088", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_completed", "job_id": 2, "label": "access"}
+
+
+=== AI LOG ===
+INFO:     Started server process [6204]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:27318 (Press CTRL+C to quit)
+INFO:     127.0.0.1:27324 - "GET /health/live HTTP/1.1" 200 OK
+{"asctime": "2026-09-22 11:54:11,566", "levelname": "INFO", "service": null, "name": "services.ai.main", "message": "triage_completed", "case_id": "c4d1a24b-83b8-4b6e-b4ad-7aea40e3dd02", "label": "incident", "confidence": 0.71}
+INFO:     127.0.0.1:27343 - "POST /triage HTTP/1.1" 200 OK
+{"asctime": "2026-09-22 11:54:13,073", "levelname": "INFO", "service": null, "name": "services.ai.main", "message": "triage_completed", "case_id": "0cc9a4c8-1fcf-4329-b0f6-040d2f2320b8", "label": "access", "confidence": 0.79}
+INFO:     127.0.0.1:27346 - "POST /triage HTTP/1.1" 200 OK
