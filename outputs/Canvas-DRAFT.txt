@@ -1,0 +1,17 @@
+DRAFT - finalize the tag and Commit SHA after GitHub approval before submitting.
+
+Repository: https://github.com/SkydenQQQ/HKUST-MAIE6000C-Skyden-Qiu
+Checkpoint tag: w03-readiness (not yet created)
+Commit SHA: PENDING - resolve the final pushed tag with git rev-parse 'w03-readiness^{commit}'
+What I changed:
+- Renamed tests/integration/test_api_integration.py python to test_api_integration.py so pytest discovers its two existing integration tests. File contents and application behavior are unchanged.
+- Completed the Activity 5 Dockerfile preparation by installing .[dev] and copying tests into the image.
+- Added submissions/week03/README.md and verification.txt.
+How I verified it:
+- Python 3.11.16: before the rename, 4 tests collected and passed; afterwards, 6 collected and passed using the same unit/integration commands.
+- Ruff: all checks passed.
+- Started API, AI and worker as separate native processes using a fresh SQLite database; Alembic migration succeeded and the complete suite passed all 7 tests, including the live smoke test.
+- Traced a case to triaged/access and its job to completed/attempts=1; checked persisted database rows.
+- Docker Desktop was unavailable. Docker build, Compose and PostgreSQL verification were not performed.
+AI Use Statement:
+OpenAI Codex assisted with interpreting the assignment, inspecting the repository, identifying and fixing test discovery, preparing the Dockerfile update, executing the checks described above, and drafting the documentation. The reported checks were executed by Codex. No application logic was changed. Docker/PostgreSQL verification is not claimed; the GitHub publication was authorized by the student on 24 September 2026.
