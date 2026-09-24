@@ -12,8 +12,6 @@ COPY scripts /app/scripts
 COPY alembic /app/alembic
 COPY alembic.ini /app/alembic.ini
 
-RUN pip install --upgrade pip && pip install -e ".[dev]"
-
-COPY tests /app/tests
+RUN pip install --upgrade pip && pip install -e .
 
 CMD ["uvicorn", "services.api.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
