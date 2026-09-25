@@ -1,0 +1,462 @@
+User-executed Docker verification; reviewed by OpenAI Codex. Account/machine transcript header omitted; local paths normalized. Results unchanged.
+Verification time: 2026-09-25T23:06:36.2060969+08:00
+Temporary build-client proxy: http://127.0.0.1:7890
+
+
+
+> docker version
+Client:
+ Version:           29.8.0
+ API version:       1.56
+ Go version:        go1.26.8
+ Git commit:        88096ef
+ Built:             Thu Sep  3 21:53:38 2026
+ OS/Arch:           windows/amd64
+ Context:           desktop-linux
+
+Server: Docker Desktop 4.92.0 (240144)
+ Engine:
+  Version:          29.8.0
+  API version:      1.56 (minimum version 1.40)
+  Go version:       go1.26.8
+  Git commit:       3ce5872
+  Built:            Thu Sep  3 21:51:20 2026
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          v2.3.5
+  GitCommit:        1294c24a7da8e5a793ed378161673abe94118892
+ runc:
+  Version:          1.5.1
+  GitCommit:        v1.5.1-0-g8f2685a4
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+> docker compose version
+Docker Compose version v5.5.1
+> docker compose config --quiet
+> docker compose up --build -d --wait --wait-timeout 180
+ Image course-repo-worker Building
+ Image course-repo-ai Building
+ Image course-repo-api Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.85kB done
+#1 DONE 0.0s
+
+#2 [api internal] load build definition from Dockerfile
+#2 transferring dockerfile: 492B done
+#2 DONE 0.0s
+
+#3 [worker internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 1.5s
+
+#4 [ai internal] load .dockerignore
+#4 transferring context: 103B done
+#4 DONE 0.0s
+
+#5 [api 1/9] FROM docker.io/library/python:3.11-slim@sha256:da047cb8f9d1d98e5c070f5300ba9f7274e33b8fc0e5be5ed88740aed1b95ba9
+#5 resolve docker.io/library/python:3.11-slim@sha256:da047cb8f9d1d98e5c070f5300ba9f7274e33b8fc0e5be5ed88740aed1b95ba9 0.0s done
+#5 CACHED
+
+#6 [ai internal] load build context
+#6 transferring context: 95.58kB 0.0s done
+#6 transferring context: 95.58kB 0.0s done
+#6 DONE 0.1s
+
+#7 [api 2/9] WORKDIR /app
+#7 DONE 0.0s
+
+#8 [api 3/9] COPY pyproject.toml README.md /app/
+#8 DONE 0.1s
+
+#9 [ai 4/9] COPY services /app/services
+#9 DONE 0.0s
+
+#9 [worker 4/9] COPY services /app/services
+#9 DONE 0.0s
+
+#10 [api 5/9] COPY scripts /app/scripts
+#10 DONE 0.1s
+
+#11 [ai 6/9] COPY alembic /app/alembic
+#11 DONE 0.0s
+
+#11 [worker 6/9] COPY alembic /app/alembic
+#11 DONE 0.0s
+
+#12 [worker 7/9] COPY alembic.ini /app/alembic.ini
+#12 DONE 0.0s
+
+#13 [worker 8/9] RUN pip install --upgrade pip && pip install -e ".[dev]"
+#13 0.976 Requirement already satisfied: pip in /usr/local/lib/python3.11/site-packages (24.0)
+#13 1.825 Collecting pip
+#13 2.484   Downloading pip-26.2.1-py3-none-any.whl.metadata (4.6 kB)
+#13 2.655 Downloading pip-26.2.1-py3-none-any.whl (1.8 MB)
+#13 3.414    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 1.8/1.8 MB 2.6 MB/s eta 0:00:00
+#13 3.444 Installing collected packages: pip
+#13 3.444   Attempting uninstall: pip
+#13 3.446     Found existing installation: pip 24.0
+#13 3.466     Uninstalling pip-24.0:
+#13 3.531       Successfully uninstalled pip-24.0
+#13 3.989 Successfully installed pip-26.2.1
+#13 3.989 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#13 6.042 Obtaining file:///app
+#13 6.043   Installing build dependencies: started
+#13 13.69   Installing build dependencies: finished with status 'done'
+#13 13.69   Checking if build backend supports build_editable: started
+#13 14.04   Checking if build backend supports build_editable: finished with status 'done'
+#13 14.04   Getting requirements to build editable: started
+#13 14.49   Getting requirements to build editable: finished with status 'done'
+#13 14.49   Preparing editable metadata (pyproject.toml): started
+#13 14.95   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#13 15.85 Collecting alembic==1.16.4 (from maie6000c-starter-template==0.1.0)
+#13 16.59   Downloading alembic-1.16.4-py3-none-any.whl.metadata (7.3 kB)
+#13 17.46 Collecting fastapi==0.116.1 (from maie6000c-starter-template==0.1.0)
+#13 17.71   Downloading fastapi-0.116.1-py3-none-any.whl.metadata (28 kB)
+#13 18.41 Collecting httpx==0.28.1 (from maie6000c-starter-template==0.1.0)
+#13 18.57   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#13 18.85 Collecting prometheus-client==0.22.1 (from maie6000c-starter-template==0.1.0)
+#13 19.00   Downloading prometheus_client-0.22.1-py3-none-any.whl.metadata (1.9 kB)
+#13 19.38 Collecting psycopg==3.2.9 (from psycopg[binary]==3.2.9->maie6000c-starter-template==0.1.0)
+#13 19.55   Downloading psycopg-3.2.9-py3-none-any.whl.metadata (4.5 kB)
+#13 21.04 Collecting pydantic==2.11.7 (from maie6000c-starter-template==0.1.0)
+#13 21.20   Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+#13 21.73 Collecting pydantic-settings==2.10.1 (from maie6000c-starter-template==0.1.0)
+#13 21.88   Downloading pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
+#13 22.15 Collecting python-json-logger==3.3.0 (from maie6000c-starter-template==0.1.0)
+#13 22.32   Downloading python_json_logger-3.3.0-py3-none-any.whl.metadata (4.0 kB)
+#13 25.47 Collecting sqlalchemy==2.0.43 (from maie6000c-starter-template==0.1.0)
+#13 25.62   Downloading sqlalchemy-2.0.43-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.6 kB)
+#13 26.07 Collecting uvicorn==0.35.0 (from uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 26.31   Downloading uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
+#13 26.81 Collecting pytest==8.4.1 (from maie6000c-starter-template==0.1.0)
+#13 27.33   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+#13 27.91 Collecting pytest-cov==6.2.1 (from maie6000c-starter-template==0.1.0)
+#13 28.07   Downloading pytest_cov-6.2.1-py3-none-any.whl.metadata (30 kB)
+#13 32.85 Collecting ruff==0.12.4 (from maie6000c-starter-template==0.1.0)
+#13 33.01   Downloading ruff-0.12.4-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+#13 34.53 Collecting Mako (from alembic==1.16.4->maie6000c-starter-template==0.1.0)
+#13 34.80   Downloading mako-1.4.3-py3-none-any.whl.metadata (2.9 kB)
+#13 39.44 Collecting typing-extensions>=4.12 (from alembic==1.16.4->maie6000c-starter-template==0.1.0)
+#13 39.70   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#13 40.07 Collecting starlette<0.48.0,>=0.40.0 (from fastapi==0.116.1->maie6000c-starter-template==0.1.0)
+#13 40.51   Downloading starlette-0.47.3-py3-none-any.whl.metadata (6.2 kB)
+#13 40.70 Collecting annotated-types>=0.6.0 (from pydantic==2.11.7->maie6000c-starter-template==0.1.0)
+#13 41.18   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#13 51.52 Collecting pydantic-core==2.33.2 (from pydantic==2.11.7->maie6000c-starter-template==0.1.0)
+#13 51.80   Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+#13 51.97 Collecting typing-inspection>=0.4.0 (from pydantic==2.11.7->maie6000c-starter-template==0.1.0)
+#13 52.16   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#13 52.54 Collecting anyio (from httpx==0.28.1->maie6000c-starter-template==0.1.0)
+#13 52.80   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#13 53.08 Collecting certifi (from httpx==0.28.1->maie6000c-starter-template==0.1.0)
+#13 53.36   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+#13 53.68 Collecting httpcore==1.* (from httpx==0.28.1->maie6000c-starter-template==0.1.0)
+#13 54.27   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#13 54.67 Collecting idna (from httpx==0.28.1->maie6000c-starter-template==0.1.0)
+#13 55.30   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#13 58.08 Collecting psycopg-binary==3.2.9 (from psycopg[binary]==3.2.9->maie6000c-starter-template==0.1.0)
+#13 58.26   Downloading psycopg_binary-3.2.9-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.9 kB)
+#13 58.59 Collecting python-dotenv>=0.21.0 (from pydantic-settings==2.10.1->maie6000c-starter-template==0.1.0)
+#13 59.04   Downloading python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+#13 59.94 Collecting iniconfig>=1 (from pytest==8.4.1->maie6000c-starter-template==0.1.0)
+#13 60.13   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+#13 60.13 Requirement already satisfied: packaging>=20 in /usr/local/lib/python3.11/site-packages (from pytest==8.4.1->maie6000c-starter-template==0.1.0) (26.3)
+#13 60.39 Collecting pluggy<2,>=1.5 (from pytest==8.4.1->maie6000c-starter-template==0.1.0)
+#13 60.60   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+#13 61.02 Collecting pygments>=2.7.2 (from pytest==8.4.1->maie6000c-starter-template==0.1.0)
+#13 61.20   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+#13 66.96 Collecting coverage>=7.5 (from coverage[toml]>=7.5->pytest-cov==6.2.1->maie6000c-starter-template==0.1.0)
+#13 67.12   Downloading coverage-7.16.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.2 kB)
+#13 69.04 Collecting greenlet>=1 (from sqlalchemy==2.0.43->maie6000c-starter-template==0.1.0)
+#13 69.24   Downloading greenlet-3.5.6-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+#13 69.50 Collecting click>=7.0 (from uvicorn==0.35.0->uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 69.75   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#13 70.04 Collecting h11>=0.8 (from uvicorn==0.35.0->uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 70.29   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#13 70.91 Collecting httptools>=0.6.3 (from uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 71.21   Downloading httptools-0.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#13 71.81 Collecting pyyaml>=5.1 (from uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 72.00   Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#13 72.63 Collecting uvloop>=0.15.1 (from uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 72.97   Downloading uvloop-0.22.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#13 74.10 Collecting watchfiles>=0.13 (from uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 74.31   Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#13 75.82 Collecting websockets>=10.4 (from uvicorn[standard]==0.35.0->maie6000c-starter-template==0.1.0)
+#13 76.06   Downloading websockets-17.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+#13 77.09 Collecting MarkupSafe>=2.0 (from Mako->alembic==1.16.4->maie6000c-starter-template==0.1.0)
+#13 77.27   Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+#13 77.75 Downloading alembic-1.16.4-py3-none-any.whl (247 kB)
+#13 80.33 Downloading fastapi-0.116.1-py3-none-any.whl (95 kB)
+#13 81.14 Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+#13 83.83 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#13 84.24 Downloading prometheus_client-0.22.1-py3-none-any.whl (58 kB)
+#13 84.58 Downloading psycopg-3.2.9-py3-none-any.whl (202 kB)
+#13 85.24 Downloading psycopg_binary-3.2.9-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.5 MB)
+#13 91.08    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 4.5/4.5 MB 813.8 kB/s  0:00:05
+#13 91.24 Downloading pydantic_core-2.33.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+#13 92.73    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 2.0/2.0 MB 1.4 MB/s  0:00:01
+#13 92.96 Downloading pydantic_settings-2.10.1-py3-none-any.whl (45 kB)
+#13 93.14 Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+#13 93.61 Downloading pytest_cov-6.2.1-py3-none-any.whl (24 kB)
+#13 93.86 Downloading python_json_logger-3.3.0-py3-none-any.whl (15 kB)
+#13 94.01 Downloading ruff-0.12.4-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.3 MB)
+#13 98.15    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 11.3/11.3 MB 2.9 MB/s  0:00:04
+#13 98.31 Downloading sqlalchemy-2.0.43-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+#13 99.32    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 3.3/3.3 MB 3.5 MB/s  0:00:01
+#13 99.47 Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
+#13 99.72 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#13 99.97 Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+#13 100.3 Downloading starlette-0.47.3-py3-none-any.whl (72 kB)
+#13 100.8 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#13 101.6 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#13 102.0 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#13 102.7 Downloading coverage-7.16.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (256 kB)
+#13 103.6 Downloading greenlet-3.5.6-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (624 kB)
+#13 105.1    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 624.4/624.4 kB 608.9 kB/s  0:00:01
+#13 105.2 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#13 105.6 Downloading httptools-0.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (464 kB)
+#13 106.4 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#13 106.8 Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+#13 106.9 Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+#13 108.5    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 1.3/1.3 MB 863.8 kB/s  0:00:01
+#13 108.7 Downloading python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+#13 108.9 Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (806 kB)
+#13 109.8    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 806.6/806.6 kB 920.8 kB/s  0:00:00
+#13 109.9 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#13 110.2 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#13 110.5 Downloading uvloop-0.22.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.8 MB)
+#13 113.1    鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣鈹佲攣 3.8/3.8 MB 1.6 MB/s  0:00:02
+#13 113.3 Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (458 kB)
+#13 113.7 Downloading websockets-17.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (224 kB)
+#13 114.4 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#13 114.8 Downloading mako-1.4.3-py3-none-any.whl (80 kB)
+#13 115.1 Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+#13 115.2 Building wheels for collected packages: maie6000c-starter-template
+#13 115.2   Building editable for maie6000c-starter-template (pyproject.toml): started
+#13 115.7   Building editable for maie6000c-starter-template (pyproject.toml): finished with status 'done'
+#13 115.7   Created wheel for maie6000c-starter-template: filename=maie6000c_starter_template-0.1.0-0.editable-py3-none-any.whl size=5538 sha256=6a902bf9b9e9311a941bdea5cc87208fc0fd80765f4a3b33084a37b81dd1434e
+#13 115.7   Stored in directory: /tmp/pip-ephem-wheel-cache-n8up2hx1/wheels/57/0f/98/bb57b2b57b95807699b822a35c022f139d38a02c27922f27ce
+#13 115.7 Successfully built maie6000c-starter-template
+#13 115.7 Installing collected packages: websockets, uvloop, typing-extensions, ruff, pyyaml, python-json-logger, python-dotenv, pygments, psycopg-binary, prometheus-client, pluggy, MarkupSafe, iniconfig, idna, httptools, h11, greenlet, coverage, click, certifi, annotated-types, uvicorn, typing-inspection, sqlalchemy, pytest, pydantic-core, psycopg, Mako, httpcore, anyio, watchfiles, starlette, pytest-cov, pydantic, httpx, alembic, pydantic-settings, fastapi, maie6000c-starter-template
+#13 118.1
+#13 118.1 Successfully installed Mako-1.4.3 MarkupSafe-3.0.3 alembic-1.16.4 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 coverage-7.16.1 fastapi-0.116.1 greenlet-3.5.6 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.28.1 idna-3.20 iniconfig-2.3.0 maie6000c-starter-template-0.1.0 pluggy-1.6.0 prometheus-client-0.22.1 psycopg-3.2.9 psycopg-binary-3.2.9 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.21.0 pytest-8.4.1 pytest-cov-6.2.1 python-dotenv-1.2.3 python-json-logger-3.3.0 pyyaml-6.0.3 ruff-0.12.4 sqlalchemy-2.0.43 starlette-0.47.3 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.35.0 uvloop-0.22.1 watchfiles-1.3.0 websockets-17.1
+#13 118.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#13 DONE 118.3s
+
+#13 [ai 8/9] RUN pip install --upgrade pip && pip install -e ".[dev]"
+#13 DONE 118.3s
+
+#14 [worker 9/9] COPY tests /app/tests
+#14 DONE 0.0s
+
+#15 [ai] exporting to image
+#15 exporting layers
+#15 exporting layers 3.5s done
+#15 exporting manifest sha256:13dac57f40dbd8a585913a24a2ee02d8b308df37fed52356ab0fe4629c4b274c 0.0s done
+#15 exporting config sha256:751bf83ec5e2ef4b2cc780381e9107d7ea88c1f6843258b32fa5b642cfad50c1 0.0s done
+#15 exporting attestation manifest sha256:93f8306aa43296055738950aeceddc63d426cf649d38325ea901b80a3ea7b680 0.0s done
+#15 exporting manifest list sha256:b443a628d8284332c9999103af44c1a15b4418247c0ac931d57ceafe8824ed5b
+#15 exporting manifest list sha256:b443a628d8284332c9999103af44c1a15b4418247c0ac931d57ceafe8824ed5b 0.0s done
+#15 naming to docker.io/library/course-repo-ai:latest 0.0s done
+#15 unpacking to docker.io/library/course-repo-ai:latest
+#15 unpacking to docker.io/library/course-repo-ai:latest 1.0s done
+#15 DONE 4.7s
+
+#16 [worker] exporting to image
+#16 exporting layers 3.5s done
+#16 exporting manifest sha256:f0cc5ef541ef31ae6085a9ab8c505175b3b38b18dae68d2e5ab0a0b082e336cf 0.0s done
+#16 exporting config sha256:b14f59611f89ded45907d4c159dc9006ead72ead001bbd4480169d2237c0e61e 0.0s done
+#16 exporting attestation manifest sha256:0a90ad7e4a419ce7cd76a23b925475a08d5c8a314c9566586b53fcd0afaebc36 0.0s done
+#16 exporting manifest list sha256:14e51352357f1c936f9996ddb939634865fdfa9c60303c37b156614795706288 0.0s done
+#16 naming to docker.io/library/course-repo-worker:latest done
+#16 unpacking to docker.io/library/course-repo-worker:latest 1.0s done
+#16 DONE 4.7s
+
+#17 [api] exporting to image
+#17 exporting layers 3.5s done
+#17 exporting manifest sha256:6e1fc16328b27f66dd3e4686b492d2cbe03e69430dd513f6a8a35cef01eb7979 0.0s done
+#17 exporting config sha256:ce04d7bdbfc779fb1ac4b576f4c3eed1f35bc8d45ef5cc30a14489d11521ce5a 0.0s done
+#17 exporting attestation manifest sha256:0a6f92658d82110f1ce7aee0b39304c5e4be74c0671fd92269fce7d94a48c494 0.0s done
+#17 exporting manifest list sha256:d0ae30247075ed6835b92ee7d60f484cc213636d1e7deb4fef3427a4d141a7c0 0.0s done
+#17 naming to docker.io/library/course-repo-api:latest done
+#17 unpacking to docker.io/library/course-repo-api:latest 1.0s done
+#17 DONE 4.7s
+
+#18 [ai] resolving provenance for metadata file
+#18 DONE 0.0s
+
+#19 [worker] resolving provenance for metadata file
+#19 DONE 0.0s
+
+#20 [api] resolving provenance for metadata file
+#20 DONE 0.0s
+ Image course-repo-ai Built
+ Image course-repo-api Built
+ Image course-repo-worker Built
+ Volume course-repo_postgres_data Creating
+ Network course-repo_default Creating
+ Volume course-repo_postgres_data Creating
+ Network course-repo_default Creating
+ Volume course-repo_postgres_data Created
+ Volume course-repo_postgres_data Created
+ Network course-repo_default Created
+ Network course-repo_default Created
+ Container course-repo-ai-1 Creating
+ Container course-repo-db-1 Creating
+ Container course-repo-ai-1 Created
+ Container course-repo-db-1 Created
+ Container course-repo-api-1 Creating
+ Container course-repo-api-1 Created
+ Container course-repo-worker-1 Creating
+ Container course-repo-worker-1 Created
+ Container course-repo-ai-1 Starting
+ Container course-repo-db-1 Starting
+ Container course-repo-ai-1 Started
+ Container course-repo-db-1 Started
+ Container course-repo-ai-1 Waiting
+ Container course-repo-db-1 Waiting
+ Container course-repo-db-1 Healthy
+ Container course-repo-ai-1 Healthy
+ Container course-repo-api-1 Starting
+ Container course-repo-api-1 Started
+ Container course-repo-db-1 Waiting
+ Container course-repo-ai-1 Waiting
+ Container course-repo-api-1 Waiting
+ Container course-repo-ai-1 Healthy
+ Container course-repo-db-1 Healthy
+ Container course-repo-api-1 Healthy
+ Container course-repo-worker-1 Starting
+ Container course-repo-worker-1 Started
+ Container course-repo-db-1 Waiting
+ Container course-repo-ai-1 Waiting
+ Container course-repo-api-1 Waiting
+ Container course-repo-worker-1 Waiting
+ Container course-repo-worker-1 Healthy
+ Container course-repo-api-1 Healthy
+ Container course-repo-db-1 Healthy
+ Container course-repo-ai-1 Healthy
+> docker compose ps
+NAME                   IMAGE                COMMAND                   SERVICE   CREATED          STATUS                    PORTS
+course-repo-ai-1       course-repo-ai       "uvicorn services.ai鈥?   ai        23 seconds ago   Up 22 seconds (healthy)   0.0.0.0:8100->8100/tcp, [::]:8100->8100/tcp
+course-repo-api-1      course-repo-api      "/bin/sh -c 'alembic鈥?   api       23 seconds ago   Up 11 seconds (healthy)   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+course-repo-db-1       postgres:16-alpine   "docker-entrypoint.s鈥?   db        23 seconds ago   Up 22 seconds (healthy)   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+course-repo-worker-1   course-repo-worker   "python -m services.鈥?   worker    23 seconds ago   Up Less than a second
+> docker compose run --rm --no-deps api pytest --collect-only -q tests/unit tests/integration
+ Container course-repo-api-run-4a4f7666934e Creating
+ Container course-repo-api-run-4a4f7666934e Created
+tests/unit/test_ai_service.py::test_triage_access_case
+tests/unit/test_ai_service.py::test_triage_general_case
+tests/integration/test_api_case_flow.py::test_health_endpoints
+tests/integration/test_api_case_flow.py::test_create_and_read_case_and_job
+tests/integration/test_api_integration.py::test_create_case_enqueues_job
+tests/integration/test_api_integration.py::test_health_ready
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.11/site-packages/starlette/testclient.py:51
+  /usr/local/lib/python3.11/site-packages/starlette/testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+../usr/local/lib/python3.11/site-packages/pythonjsonlogger/jsonlogger.py:11
+  /usr/local/lib/python3.11/site-packages/pythonjsonlogger/jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 tests collected in 0.01s
+> docker compose run --rm --no-deps api pytest -q tests/unit tests/integration
+ Container course-repo-api-run-55b07ebef6d2 Creating
+ Container course-repo-api-run-55b07ebef6d2 Created
+......                                                                   [100%]
+=============================== warnings summary ===============================
+../usr/local/lib/python3.11/site-packages/starlette/testclient.py:51
+  /usr/local/lib/python3.11/site-packages/starlette/testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+../usr/local/lib/python3.11/site-packages/pythonjsonlogger/jsonlogger.py:11
+  /usr/local/lib/python3.11/site-packages/pythonjsonlogger/jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+6 passed, 2 warnings in 0.15s
+> docker compose run --rm --no-deps api python -m ruff check services tests
+ Container course-repo-api-run-da7b5902793b Creating
+ Container course-repo-api-run-da7b5902793b Created
+All checks passed!
+> docker compose run --rm --no-deps -e SMOKE_BASE_URL=http://api:8000 api pytest -q
+ Container course-repo-api-run-1676211ab839 Creating
+ Container course-repo-api-run-1676211ab839 Created
+.......                                                                  [100%]
+=============================== warnings summary ===============================
+../usr/local/lib/python3.11/site-packages/starlette/testclient.py:51
+  /usr/local/lib/python3.11/site-packages/starlette/testclient.py:51: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+../usr/local/lib/python3.11/site-packages/pythonjsonlogger/jsonlogger.py:11
+  /usr/local/lib/python3.11/site-packages/pythonjsonlogger/jsonlogger.py:11: DeprecationWarning: pythonjsonlogger.jsonlogger has been moved to pythonjsonlogger.json
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+7 passed, 2 warnings in 1.28s
+{"path": "/", "status": 200, "body": {"service": "api", "status": "ok"}}
+{"path": "/health/live", "status": 200, "body": {"service": "api", "status": "ok"}}
+{"path": "/health/ready", "status": 200, "body": {"service": "api", "status": "ok"}}
+{"path": "/docs", "status": 200, "body": "Swagger HTML received"}
+{"path": "http://ai:8100/health/live", "status": 200, "body": {"service": "ai", "status": "ok"}}
+metrics: HTTP 200; api_http_requests_total present
+Created: {"case": {"id": "4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1", "title": "Cannot login to portal", "description": "Password reset did not restore access to the dashboard.", "status": "queued", "ai_label": null, "ai_summary": null, "ai_confidence": null, "created_at": "2026-09-25T15:09:12.200142Z", "updated_at": "2026-09-25T15:09:12.200145Z"}, "job": {"id": 2, "case_id": "4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1", "job_type": "triage_case", "status": "pending", "attempts": 0, "error": null, "created_at": "2026-09-25T15:09:12.201067Z", "claimed_at": null, "completed_at": null}}
+Final case: {"id": "4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1", "title": "Cannot login to portal", "description": "Password reset did not restore access to the dashboard.", "status": "triaged", "ai_label": "access", "ai_summary": "Cannot login to portal: Password reset did not restore access to the dashboard.", "ai_confidence": 0.79, "created_at": "2026-09-25T15:09:12.200142Z", "updated_at": "2026-09-25T15:09:13.083179Z"}
+Final job: {"id": 2, "case_id": "4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1", "job_type": "triage_case", "status": "completed", "attempts": 1, "error": null, "created_at": "2026-09-25T15:09:12.201067Z", "claimed_at": "2026-09-25T15:09:13.069628Z", "completed_at": "2026-09-25T15:09:13.082898Z"}
+PostgreSQL case row: ('triaged', 'access')
+PostgreSQL job row: ('completed', 1, None)
+PostgreSQL migration: ('20260713_0001',)
+PASS: real Compose API -> PostgreSQL -> worker -> AI -> persisted result
+> docker compose logs --no-color --tail=30 api worker ai
+worker-1  | {"asctime": "2026-09-25 15:09:04,986", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "worker_started", "poll_seconds": 2.0, "ai_service_url": "http://ai:8100"}
+worker-1  | {"asctime": "2026-09-25 15:09:11,036", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_claimed", "job_id": 1, "case_id": "76a68085-6248-4f90-b797-dfcaad214047"}
+worker-1  | {"asctime": "2026-09-25 15:09:11,061", "levelname": "INFO", "service": null, "name": "httpx", "message": "HTTP Request: POST http://ai:8100/triage \"HTTP/1.1 200 OK\""}
+ai-1      | INFO:     Started server process [1]
+worker-1  | {"asctime": "2026-09-25 15:09:11,066", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_completed", "job_id": 1, "label": "incident"}
+ai-1      | INFO:     Waiting for application startup.
+worker-1  | {"asctime": "2026-09-25 15:09:13,072", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_claimed", "job_id": 2, "case_id": "4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1"}
+ai-1      | INFO:     Application startup complete.
+worker-1  | {"asctime": "2026-09-25 15:09:13,080", "levelname": "INFO", "service": null, "name": "httpx", "message": "HTTP Request: POST http://ai:8100/triage \"HTTP/1.1 200 OK\""}
+api-1     | INFO:     Application startup complete.
+worker-1  | {"asctime": "2026-09-25 15:09:13,084", "levelname": "INFO", "service": null, "name": "services.worker.main", "message": "job_completed", "job_id": 2, "label": "access"}
+api-1     | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+api-1     | {"asctime": "2026-09-25 15:09:04,005", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/health/live", "status_code": "200", "duration_seconds": 0.0008}
+ai-1      | INFO:     Uvicorn running on http://0.0.0.0:8100 (Press CTRL+C to quit)
+ai-1      | INFO:     127.0.0.1:51696 - "GET /health/live HTTP/1.1" 200 OK
+ai-1      | INFO:     127.0.0.1:33280 - "GET /health/live HTTP/1.1" 200 OK
+api-1     | INFO:     127.0.0.1:47774 - "GET /health/live HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:10,346", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "case_created", "case_id": "76a68085-6248-4f90-b797-dfcaad214047", "job_id": 1}
+ai-1      | {"asctime": "2026-09-25 15:09:11,061", "levelname": "INFO", "service": null, "name": "services.ai.main", "message": "triage_completed", "case_id": "76a68085-6248-4f90-b797-dfcaad214047", "label": "incident", "confidence": 0.71}
+ai-1      | INFO:     172.18.0.5:58476 - "POST /triage HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:10,347", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "POST", "path": "/cases", "status_code": "201", "duration_seconds": 0.0819}
+ai-1      | INFO:     172.18.0.4:58332 - "GET /health/live HTTP/1.1" 200 OK
+ai-1      | {"asctime": "2026-09-25 15:09:13,080", "levelname": "INFO", "service": null, "name": "services.ai.main", "message": "triage_completed", "case_id": "4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1", "label": "access", "confidence": 0.79}
+ai-1      | INFO:     172.18.0.5:58480 - "POST /triage HTTP/1.1" 200 OK
+api-1     | INFO:     172.18.0.6:34870 - "POST /cases HTTP/1.1" 201 Created
+api-1     | {"asctime": "2026-09-25 15:09:10,354", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/cases/76a68085-6248-4f90-b797-dfcaad214047", "status_code": "200", "duration_seconds": 0.0023}
+api-1     | INFO:     172.18.0.6:34878 - "GET /cases/76a68085-6248-4f90-b797-dfcaad214047 HTTP/1.1" 200 OK
+api-1     | INFO:     172.18.0.6:34884 - "GET /cases/76a68085-6248-4f90-b797-dfcaad214047 HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:11,372", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/cases/76a68085-6248-4f90-b797-dfcaad214047", "status_code": "200", "duration_seconds": 0.0042}
+api-1     | {"asctime": "2026-09-25 15:09:12,187", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/", "status_code": "200", "duration_seconds": 0.0005}
+api-1     | INFO:     172.18.0.4:36946 - "GET / HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:12,189", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/health/live", "status_code": "200", "duration_seconds": 0.0005}
+api-1     | INFO:     172.18.0.4:36948 - "GET /health/live HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:12,192", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/health/ready", "status_code": "200", "duration_seconds": 0.0019}
+api-1     | INFO:     172.18.0.4:36960 - "GET /health/ready HTTP/1.1" 200 OK
+api-1     | INFO:     172.18.0.4:36966 - "GET /docs HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:12,194", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/docs", "status_code": "200", "duration_seconds": 0.0001}
+api-1     | {"asctime": "2026-09-25 15:09:12,198", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/metrics", "status_code": "200", "duration_seconds": 0.0012}
+api-1     | INFO:     172.18.0.4:36978 - "GET /metrics HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:12,209", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "case_created", "case_id": "4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1", "job_id": 2}
+api-1     | {"asctime": "2026-09-25 15:09:12,209", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "POST", "path": "/cases", "status_code": "201", "duration_seconds": 0.0108}
+api-1     | INFO:     172.18.0.4:36980 - "POST /cases HTTP/1.1" 201 Created
+api-1     | {"asctime": "2026-09-25 15:09:12,213", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/jobs/2", "status_code": "200", "duration_seconds": 0.0023}
+api-1     | INFO:     172.18.0.4:36992 - "GET /jobs/2 HTTP/1.1" 200 OK
+api-1     | INFO:     172.18.0.4:37008 - "GET /jobs/2 HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:13,220", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/jobs/2", "status_code": "200", "duration_seconds": 0.005}
+api-1     | INFO:     172.18.0.4:37010 - "GET /cases/4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1 HTTP/1.1" 200 OK
+api-1     | {"asctime": "2026-09-25 15:09:13,225", "levelname": "INFO", "service": null, "name": "services.api.main", "message": "request_completed", "method": "GET", "path": "/cases/4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1", "status_code": "200", "duration_seconds": 0.003}
+PASS: Docker lab verification completed. No volumes were deleted.

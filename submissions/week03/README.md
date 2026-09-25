@@ -7,93 +7,90 @@
 - Repository: https://github.com/SkydenQQQ/HKUST-MAIE6000C-Skyden-Qiu
 - Revision branch: `fix/week03-docker-verification`
 - Required checkpoint tag: `w03-readiness`
-- Existing remote checkpoint: `1ca9e299f65ac96e47a2672e9cf36cea3e94707f` (previous submission; does not include this revision).
-- Status: **pending Docker/PostgreSQL verification and authenticated publication**. Do not submit this revision as a completed Docker readiness checkpoint yet.
+- Commit SHA: resolve the published checkpoint with `git rev-parse 'w03-readiness^{commit}'`; record that exact SHA in Canvas.
 
 ## 1. What I changed
 
-The bounded change restores two existing integration tests that pytest silently omitted. The original filename, `test_api_integration.py python`, does not match pytest's Python test-file discovery pattern. Renaming it to `test_api_integration.py` restores collection without changing its contents.
+The bounded engineering change restores two existing integration tests that pytest silently omitted. The original filename `test_api_integration.py python` did not match pytest's Python test-file discovery pattern. Renaming it to `test_api_integration.py` restores collection without changing the test contents. The tests check that creating a case queues a pending job and that a healthy readiness endpoint returns `status: ok`.
 
-The restored tests verify that creating a case queues a pending job and that a healthy readiness endpoint returns `status: ok`. The baseline unit/integration suite has four tests; the corrected suite has six. This improves verification coverage without changing application behavior.
+The Week 3 Activity 5 prerequisite is also included: the Dockerfile installs `.[dev]` and copies `tests` into `/app/tests`, so tests can run inside the image.
 
-The Week 3 Activity 5 prerequisite is also retained: the Dockerfile installs `.[dev]` and copies `tests` into `/app/tests`, allowing pytest to run inside the image. Image build success is not claimed until Docker evidence is actually recorded.
-
-This revision corrects documentation, adds an explicit AI Use Statement, and removes redundant root-level submission copies. The canonical submission lives under `submissions/week03/`.
+Compared with the previous submitted checkpoint `1ca9e299f65ac96e47a2672e9cf36cea3e94707f`, this revision retains the same application code, tests, Dockerfile, migrations and CI configuration. It closes the previously disclosed Docker/PostgreSQL verification gap, records new evidence, updates this explanation, and removes redundant root-level copies of the submission files.
 
 ## 2. Files touched
 
+Original bounded change, retained:
 - `tests/integration/test_api_integration.py python` -> `tests/integration/test_api_integration.py`: filename-only rename.
-- `Dockerfile`: install test dependencies and include test files.
-- `submissions/week03/README.md`: explanation, actual status and reproduction steps.
-- `submissions/week03/reverification-2026-09-25.txt`: fresh local test evidence.
-- `submissions/week03/verification.txt`: preserved historical native verification, dated 22 September 2026; not Docker evidence.
-- Root-level `week03-README.md`, `week03-verification.txt` and `week03-changes.patch`: redundant previous delivery copies removed.
+- `Dockerfile`: test dependencies and test files in the image.
+
+Resubmission evidence and documentation:
+- `submissions/week03/README.md`: results and reproduction steps.
+- `submissions/week03/docker-verification.txt`: successful Docker/PostgreSQL run on 25 September 2026.
+- `submissions/week03/reverification-2026-09-25.txt`: fresh baseline/corrected native test comparison.
+- `submissions/week03/environment-2026-09-25.txt`: final environment and resolved setup issues.
+- `submissions/week03/verification.txt`: preserved historical native SQLite evidence from 22 September.
+- Removed root duplicates `week03-README.md`, `week03-verification.txt`, `week03-changes.patch`; canonical material is in this directory.
 
 ## 3. How I verified it
 
-### Local baseline and corrected tests
+### Actual results
 
-Current main, commit `2891ac83fbc48be9d18a3e021f72bb0eb0a00494`, restores the initial project tree. It was cloned separately for the baseline comparison. The revision retains the filename fix already in `submission/week03`.
+The user executed the prepared verification script in Windows PowerShell 5.1 on 25 September 2026, 23:06-23:09 China time. The saved transcript was reviewed against the checks below. Docker Desktop 4.92.0, Docker Engine 29.8.0, Compose 5.5.1 and WSL 2.7.14 were used. The base image ran Python 3.11.16; PostgreSQL used `postgres:16-alpine`.
 
-Use Python 3.11 (the project requires `>=3.11,<3.12`) in a virtual environment:
+| Check | Observed result |
+| --- | --- |
+| Fresh native baseline vs corrected discovery/execution | 4 passed before; 6 passed after; Python 3.11.15 |
+| Native Ruff | All checks passed |
+| Compose configuration and image builds | Succeeded |
+| Services | api, ai, db running and healthy; worker running (no dedicated worker healthcheck) |
+| Container unit/integration collection and execution | 6 collected; 6 passed |
+| Container Ruff on services and tests | All checks passed |
+| Full suite against real Compose API | 7 passed, including the HTTP smoke test |
+| API root, live, ready and Swagger docs | HTTP 200 |
+| API metrics | HTTP 200; api_http_requests_total present |
+| AI liveness | HTTP 200 |
+| Login case | queued -> triaged; ai_label access; confidence 0.79 |
+| Job | pending -> completed; attempts 1; error null |
+| PostgreSQL rows | Case ('triaged', 'access'); job ('completed', 1, None) |
+| Database migration | 20260713_0001 |
+| Worker/AI logs | job_claimed, POST /triage, triage_completed, job_completed |
+
+Traced case ID: `4f23e4fb-bf7e-46f2-92b7-9f1ec8e924a1`; job ID: `2`.
+
+The six unit/integration tests use SQLite fixtures even when run inside Docker. The smoke test and separate SQL-checked trace exercise the real Compose API, worker, AI and PostgreSQL. Two dependency deprecation warnings were emitted; no test failed. The transcript's Windows account/machine header and local absolute paths are omitted or normalized for publication; verification results are unchanged.
+
+### Reproduce
+
+From the repository root, with Docker Desktop running:
 
 ```powershell
-python -m pip install -e ".[dev]"
-python -m pytest --collect-only -q tests/unit tests/integration
-python -m pytest -q tests/unit tests/integration
-python -m ruff check .
-```
-
-Expected discovery: four tests on unmodified main, six after the rename. On 25 September, Python 3.11.15 reproduced four collected/passing baseline tests and six collected/passing corrected tests; Ruff passed. Two dependency deprecation warnings were reported. Actual command outputs and exit codes are in `reverification-2026-09-25.txt`. Fixtures explicitly use SQLite; these checks cannot establish that Docker, PostgreSQL or the asynchronous worker stack works.
-
-The older `verification.txt` records a native API/AI/worker smoke run using SQLite on 22 September. It is historical evidence, not a new run or equivalent to Compose verification.
-
-### Required Docker/PostgreSQL verification - pending
-
-On 25 September Git 2.40.0 and VS Code were found. The user then installed Docker Desktop 4.92.0. Its actual dashboard reports `Virtualization support not detected` and `Engine stopped`; `wsl --status` reports that WSL is not installed. Docker is installed, but the engine and the following checks are not yet ready.
-
-After WSL 2 and Docker Desktop are installed and the engine is running:
-
-```powershell
-git --version
-docker --version
-docker compose version
 if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 docker compose config --quiet
 docker compose up --build -d --wait --wait-timeout 180
 docker compose ps
 docker compose run --rm --no-deps api pytest --collect-only -q tests/unit tests/integration
 docker compose run --rm --no-deps api pytest -q tests/unit tests/integration
+docker compose run --rm --no-deps api python -m ruff check services tests
 docker compose run --rm --no-deps -e SMOKE_BASE_URL=http://api:8000 api pytest -q
 ```
 
-Expected: `db`, `ai`, `api`, `worker` running; six unit/integration tests pass; all seven tests pass when the smoke test targets the real Compose API. Fixture tests still use SQLite inside Docker; the smoke test exercises the API/worker/AI/PostgreSQL stack.
+Expected: six fixture tests pass, then all seven tests pass including the live-stack smoke test. API docs: `http://localhost:8000/docs`; AI liveness: `http://localhost:8100/health/live`. Use the actual ports from `.env` if changed.
 
-Open `http://localhost:8000/docs` (or the actual `API_HOST_PORT` in `.env`). Check `/`, `/health/live`, `/health/ready`, `/metrics`, and `http://localhost:8100/health/live`. Submit a synthetic login case and capture its case/job IDs. Confirm `triaged`/`access` and `completed` with `attempts: 1`, then check those IDs in PostgreSQL and worker/AI logs.
+Submit a synthetic login case, capture its returned case/job IDs, then retrieve `/cases/{id}` and `/jobs/{id}`. Confirm the final states above and inspect the same rows in PostgreSQL:
 
-Save actual outputs as `docker-verification.txt` only after execution. The separately supplied `Verify-Docker-Lab.ps1` automates these checks and copies its transcript here only on success. Its syntax is checked; runtime behavior is unverified until Docker is available.
+```powershell
+docker compose exec db psql -U postgres -d maie6000c -c "SELECT id, status, ai_label FROM cases ORDER BY created_at DESC LIMIT 3;"
+docker compose exec db psql -U postgres -d maie6000c -c "SELECT id, case_id, status, attempts, error FROM jobs ORDER BY id DESC LIMIT 3;"
+docker compose logs --tail=30 worker ai
+```
 
-### Git publication
-
-The new local branch is `fix/week03-docker-verification`. The user initially reported a GitHub login restriction, then confirmed browser login was restored. Command-line push authentication still did not succeed in this session (`cannot spawn sh` / credentials unavailable). Public reads work; browser login alone has not established a usable Git push session.
-
-After Docker verification passes, update this README with actual results, commit the evidence, push the branch and review a PR against main. Merge the verified change before publishing the final checkpoint. The existing `w03-readiness` tag must not be silently overwritten: confirm its replacement with the repository owner, preserve the previous commit reference, and replace it only when the corrected checkpoint is ready.
-
-Resolve the final tag with `git rev-parse 'w03-readiness^{commit}'`. Verify the remote tag resolves to the same commit before pasting the Canvas entry. A local commit or zip does not satisfy the pushed-tag requirement.
+On this machine, Docker Hub initially timed out. The existing local HTTP proxy was configured in Docker Desktop and temporarily supplied to the build client as HTTP_PROXY/HTTPS_PROXY. Proxy values are machine-specific and are not application requirements. Internal hosts were excluded using NO_PROXY. The successful run did not delete any database volumes.
 
 ## 4. Known limitations or notes
 
-- Docker image build, Compose startup and PostgreSQL end-to-end behavior remain unverified. This is a real readiness gap.
-- The rename restores existing coverage, some overlapping; it adds no application feature.
-- No application source, migration or CI workflow was changed.
-- Existing behavior: readiness raises a server error if the database is unavailable; failed jobs are not retried automatically.
-- Rollback: switch away from this branch, or revert the relevant commit after merge. No schema rollback is needed. Do not delete database volumes to undo this change.
-
-## 5. AI Use Statement
-
-- Tool: OpenAI Codex.
-- Purpose: compare course instructions with the repository, review the existing filename correction, assist with setup, execute verification, and draft documentation and a Docker verification helper.
-- Materially assisted areas: Dockerfile/test-discovery review, verification evidence, this README, the separate helper and Canvas draft.
-- Checks and limitations: Codex checked that the renamed test content is unchanged and distinguished native SQLite results from Docker/PostgreSQL evidence. Docker validation and remote publication are not claimed.
-- Rejected approach: treating a native SQLite run as proof of Docker/PostgreSQL readiness, or tagging unverified work as complete.
-- Student review: this statement does not assert that the student personally ran tool-executed commands. The student must review and understand the change and update final verification/publication status before submission.
+- This change restores existing coverage, including some overlapping tests; it adds no application feature.
+- The 22 September native SQLite evidence is historical; this revision adds the previously missing Docker/PostgreSQL evidence.
+- Existing behavior remains: database outage can yield a readiness server error; failed jobs are not automatically retried. Outage/retry behavior was not separately tested in this run.
+- No new remote CI result is claimed by the local Docker verification. Check the new PR's CI independently.
+- Before Canvas resubmission, verify the remote w03-readiness tag refers to the new checkpoint, not the previous submission.
+- Rollback by switching branches or reverting the change commit; no schema rollback or volume deletion is needed.

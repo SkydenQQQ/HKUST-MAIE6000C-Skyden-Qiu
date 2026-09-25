@@ -1,19 +1,15 @@
-Environment check, 2026-09-25. Observed by OpenAI Codex.
-Git: 2.40.0.windows.1; installed at C:/Program Files/Git.
-Editor: VS Code present.
-Python used for fresh tests: 3.11.15 in an isolated local virtual environment.
-Docker Desktop: user installed version 4.92.0 during this session.
-Docker dashboard exact text:
-  Virtualization support not detected
-  Docker Desktop failed to start because virtualisation support wasn't detected.
-  Contact your IT admin to enable virtualization or check system requirements.
-  Engine stopped
-WSL status: exit 50; Windows Subsystem for Linux not installed.
-CLI: docker.exe execution rejected with Access denied even after directory read permission was granted.
-Docker compose build/start, PostgreSQL validation and live smoke: NOT EXECUTED.
-GitHub public clone and ls-remote: succeeded.
-GitHub browser login: user reports restored; not independently verified in an accessible browser.
-Git push --dry-run: failed (cannot spawn sh; username unavailable with interactive prompts disabled).
-Remote publication of the revision: NOT EXECUTED.
-Existing remote w03-readiness commit: 1ca9e299f65ac96e47a2672e9cf36cea3e94707f.
-No remote tags were changed. No database volumes were deleted.
+Final environment verification - 25 September 2026
+Git 2.40.0.windows.1; VS Code present.
+Native fixture test runtime: Python 3.11.15.
+Docker Desktop 4.92.0; Engine 29.8.0; Compose 5.5.1.
+WSL 2.7.14 installed and VirtualMachinePlatform enabled; Windows restarted.
+Base image Python 3.11.16; database postgres:16-alpine.
+Docker engine running; all four course services started successfully.
+Earlier WSL/virtualization startup and Docker Hub connectivity blockers resolved.
+Docker Desktop and build-client proxy configured using the existing local proxy.
+Verification executed by the user in Windows PowerShell; transcript reviewed by Codex.
+Unit/integration: 6 passed. Full suite: 7 passed. Ruff: passed.
+Health, metrics, asynchronous case/job flow and PostgreSQL persistence: passed.
+See docker-verification.txt for observed outputs and IDs.
+No application logic was changed after this run; subsequent changes are evidence/documentation only.
+No database volumes were deleted. Git publication is a separate final step.
