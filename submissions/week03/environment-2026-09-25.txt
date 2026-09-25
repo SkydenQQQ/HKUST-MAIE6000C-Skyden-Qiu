@@ -1,0 +1,19 @@
+Environment check, 2026-09-25. Observed by OpenAI Codex.
+Git: 2.40.0.windows.1; installed at C:/Program Files/Git.
+Editor: VS Code present.
+Python used for fresh tests: 3.11.15 in an isolated local virtual environment.
+Docker Desktop: user installed version 4.92.0 during this session.
+Docker dashboard exact text:
+  Virtualization support not detected
+  Docker Desktop failed to start because virtualisation support wasn't detected.
+  Contact your IT admin to enable virtualization or check system requirements.
+  Engine stopped
+WSL status: exit 50; Windows Subsystem for Linux not installed.
+CLI: docker.exe execution rejected with Access denied even after directory read permission was granted.
+Docker compose build/start, PostgreSQL validation and live smoke: NOT EXECUTED.
+GitHub public clone and ls-remote: succeeded.
+GitHub browser login: user reports restored; not independently verified in an accessible browser.
+Git push --dry-run: failed (cannot spawn sh; username unavailable with interactive prompts disabled).
+Remote publication of the revision: NOT EXECUTED.
+Existing remote w03-readiness commit: 1ca9e299f65ac96e47a2672e9cf36cea3e94707f.
+No remote tags were changed. No database volumes were deleted.
